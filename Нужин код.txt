@@ -1,0 +1,102 @@
+
+client.on("message", (message) => { //В случае если бот заметит новое сообщение (message)..
+    if(message.content == "!help"){ //Он проверит если его контент (content) равняется фразе "!privet"
+    message.channel.send("Привет мои команды: :wave:"); //И в случае если так и есть он ответит на сообщение фразой Привет! и отправит смайлик
+    message.channel.send("!help - Узнать этот список");
+    message.channel.send("!admins - Список админов");
+    message.channel.send("!groups - Узнать группы сервера")
+    message.channel.send("")
+
+    } //Закрытие условия
+    }); //Закрытие события
+
+client.on("message", (message) => {
+    if(message.content == "!admins"){
+        message.channel.send("> Cписок администрации: ")
+        message.channel.send("> Разработчик бота: **Miraqle__**")
+        message.channel.send("> Основатель сервера: **ziki12** ")
+    }
+    }); // Окончание условия 2
+
+
+
+    client.on('message', message => {
+        if (!message.guild) return;
+        if (message.content.startsWith('!kick')) {
+          const user = message.mentions.users.first();
+          if (user) {
+            const member = message.guild.member(user);
+            if (member) {
+              member.kick('Дополнительная причина, которая будет отображаться в журналах аудита').then(() => {
+                message.reply(`Успешно кикнут: ${user.tag}`);
+              }).catch(err => {
+                message.reply(`Я не смогу кикнуть ${user.tag}`);
+                console.error(err);
+              });
+            } else {
+              message.reply('Этот пользователь не в этой гильдии!');
+            }
+          } else {
+            message.reply('Не указан пользователь для кика!');
+          }
+        }
+      });
+
+
+      client.on('message', message => {
+        // Ignore messages that aren't from a guild
+        if (!message.guild) return;
+      
+        // if the message content starts with "!ban"
+        if (message.content.startsWith('!ban')) {
+          // Assuming we mention someone in the message, this will return the user
+          // Read more about mentions over at https://discord.js.org/#/docs/main/stable/class/MessageMentions
+          const user = message.mentions.users.first();
+          // If we have a user mentioned
+          if (user) {
+            // Now we get the member from the user
+            const member = message.guild.member(user);
+            // If the member is in the guild
+            if (member) {
+              /**
+               * Ban the member
+               * Make sure you run this on a member, not a user!
+               * There are big differences between a user and a member
+               * Read more about what ban options there are over at
+               * https://discord.js.org/#/docs/main/stable/class/GuildMember?scrollTo=ban
+               */
+              member.ban({
+                reason: 'Он был плохим!',
+              }).then(() => {
+                // We let the message author know we were able to ban the person
+                message.reply(`Успешно забанен: ${user.tag}`);
+              }).catch(err => {
+                // An error happened
+                // This is generally due to the bot not being able to ban the member,
+                // either due to missing permissions or role hierarchy
+                message.reply('Я не могу забанить этого пользователя');
+                // Log the error
+                console.error(err);
+              });
+            } else {
+              // The mentioned user isn't in this guild
+              message.reply('Этот пользователь не в этой гильдии!');
+            }
+          } else {
+          // Otherwise, if no user was mentioned
+            message.reply('Не могу забанить Данного пользователя либо роль высокая! Или его нет!');
+          }
+        }
+      });
+
+      client.on("message", (message) => {
+        if(message.content == "!groups"){
+            message.channel.send("***Группы:***")
+            message.channel.send("> **Discord-Group: https://discord.gg/eDVqKJC**")
+            message.channel.send("> **Группа вк: vk.com/arcminesky**")
+            message.channel.send("> **Dev-Group vk.com/arcmine_dev**")
+            message.channel.send("> **Мем группа: vk.com/arcmine_memes**")
+            message.channel.send("> **Магазин: https://arcminesky.trademc.org/**")
+        }
+    });       
+            
